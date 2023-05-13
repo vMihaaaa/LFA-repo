@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Road App</title>
+    <script type="text/javascript" src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style type="text/css">
+      #graph-container {
+        width: 900x;
+        height: 900px;
+        border: 1px solid lightgray;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="graph-container"></div>
+    <script type="text/javascript">
+      // create a network with manipulation enabled
+      var container = document.getElementById("graph-container");
+      var data = {
+        nodes: [],
+        edges: []
+      };
+      var options = {
+        manipulation: {
+          enabled: true,
+          addNode: function(data, callback) {
+            var key = prompt("Enter location name:");
+            var value = prompt("Enter population number:");
+            data.label = key + "\n" + value;
+            data.title = "Key: " + key + "\nValue: " + value;
+            callback(data);
+          },
+          addEdge: function(data, callback) {
+            var key = prompt("Enter road name:");
+            var value = prompt("Enter distance in km:");
+            data.label = key + "\n" + value;
+            data.title = "Key: " + key + "\nValue: " + value;
+            callback(data);
+          },
+          editNode: function(data, callback) {
+            var key = prompt("Enter new location name:");
+            var value = prompt("Enter new population number:");
+            data.label = key + "\n" + value;
+            data.title = "Key: " + key + "\nValue: " + value;
+            callback(data);
+          },
+          editEdge: {
+            editWithoutDrag: function(data, callback) {
+              var key = prompt("Enter new road name:");
+              var value = prompt("Enter new road:");
+              data.label = key + "\n" + value;
+              data.title = "Key: " + key + "\nValue: " + value;
+              callback(data);
+            }
+          }
+        }
+      };
+      var network = new vis.Network(container, data, options);    
+</script>
+</body>
+</html>
